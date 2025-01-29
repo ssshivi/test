@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Setup .NET (if your project is .NET-based)
-      - name: Setup .NET
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0'  # Adjust version based on your project
+          dotnet-version: '8.0' # Adjust version based on your project
 
       # Step 3: Restore dependencies
       - name: Restore dependencies
@@ -34,7 +34,7 @@ jobs:
 
       # Step 6: Deploy to Azure
       - name: Deploy to Azure App Service
-        uses: Azure/functions-action@v4  # For Azure Function
+        uses: Azure/functions-action@v1  # For Azure Function
         with:
           app-name: testshwetaresource  # Replace with your Azure App Service name
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
