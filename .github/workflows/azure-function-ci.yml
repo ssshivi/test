@@ -33,6 +33,9 @@ jobs:
         run: dotnet publish --configuration Release --output ./publish --arch x64
 
       # Step 6: Deploy to Azure
+      - name: Set Azure User Agent
+        run: echo "AZURE_HTTP_USER_AGENT=GITHUBACTIONS_DeployWebAppToAzure" >> $GITHUB_ENV
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2.0.0  # For Azure Function
         with:
