@@ -33,6 +33,7 @@ jobs:
         run: dotnet publish --configuration Release --output ./publish --arch x64
       - name: Debug GitHub Environment Variables
         run: env | sort
+      #Allow unsecure temporary  
       - name: Allow Unsecure Commands
         run: echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
 
