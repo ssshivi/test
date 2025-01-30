@@ -31,6 +31,9 @@ jobs:
       # Step 5: Publish the project
       - name: Publish project
         run: dotnet publish --configuration Release --output ./publish --arch x64
+      - name: Debug GitHub Environment Variables
+        run: env | sort
+
 
       # Step 6: Deploy to Azure
       - name: Set Azure User Agent
