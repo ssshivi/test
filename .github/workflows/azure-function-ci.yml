@@ -42,10 +42,10 @@ jobs:
       - name: 'Set Azure User Agent'
         run: echo "AZURE_HTTP_USER_AGENT=GITHUBACTIONS_DeployWebAppToAzure" >> $GITHUB_ENV
 
-      # - name: 'Deploy to Azure App Service'
-      #   uses: azure/webapps-deploy@v2  # For Azure Function
-      #   with:
-      #     app-name: 'testshwetaresource'  # Replace with your Azure App Service name
-      #     publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
+      - name: 'Deploy to Azure App Service'
+        uses: azure/webapps-deploy@v2  # For Azure Function
+        with:
+          app-name: 'testshwetaresource'  # Replace with your Azure App Service name
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
 
       
