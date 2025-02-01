@@ -45,7 +45,7 @@ jobs:
       - name: 'Deploy to Azure App Service'
         uses: azure/webapps-deploy@v2  # For Azure Function
         with:
-          app-name: 'testshwetaresource'  # Replace with your Azure App Service name
+          app-name: 'testshwetaapp'  # Replace with your Azure App Service name
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
 
       
