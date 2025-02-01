@@ -10,56 +10,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+      # Step 1: Checkout the code from GitHub
+      - name: 'Checkout code'
+        uses: actions/checkout@v3
 
-    - name: Publish .NET Function App
-      run: dotnet publish --configuration Release --output ./publish
+      # Step 2: Setup .NET (if your project is .NET-based)
+      - name: 'Setup .NET 8'
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0' # Adjust version based on your project
 
-    - name: Deploy to Azure Function App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: testshwetaapp
-        package: ./publish
+      # Step 3: Restore dependencies
+      - name: 'Restore dependencies'
+        run: dotnet restore
 
-      # # Step 1: Checkout the code from GitHub
-      # - name: 'Checkout code'
-      #   uses: actions/checkout@v3
+      # Step 4: Build the project
+      - name: 'Build the project'
+        run: dotnet build --no-restore
 
-      # # Step 2: Setup .NET (if your project is .NET-based)
-      # - name: 'Setup .NET 8'
-      #   uses: actions/setup-dotnet@v3
-      #   with:
-      #     dotnet-version: '8.0' # Adjust version based on your project
-
-      # # Step 3: Restore dependencies
-      # - name: 'Restore dependencies'
-      #   run: dotnet restore
-
-      # # Step 4: Build the project
-      # - name: 'Build the project'
-      #   run: dotnet build --no-restore
-
-      # # Step 5: Publish the project
+      # Step 5: Publish the project
+      - name: Publish .NET Function App
+        run: dotnet publish ./gittest.csproj --configuration Release --output ./publish
       # - name: 'Publish project'
       #   run: dotnet publish --configuration Release --output ./publish --arch x64
-      # - name: 'Debug GitHub Environment Variables'
-      #   run: env | sort
-      # #Allow unsecure temporary  
-      # - name: 'Allow Unsecure Commands'
-      #   run: echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
+      - name: 'Debug GitHub Environment Variables'
+        run: env | sort
+      #Allow unsecure temporary  
+      - name: 'Allow Unsecure Commands'
+        run: echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
 
 
-      # # Step 6: Deploy to Azure
-      # - name: 'Set Azure User Agent'
-      #   run: echo "AZURE_HTTP_USER_AGENT=GITHUBACTIONS_DeployWebAppToAzure" >> $GITHUB_ENV
+      # Step 6: Deploy to Azure
+      - name: 'Set Azure User Agent'
+        run: echo "AZURE_HTTP_USER_AGENT=GITHUBACTIONS_DeployWebAppToAzure" >> $GITHUB_ENV
 
-      # - name: 'Deploy to Azure App Service'
-      #   uses: azure/webapps-deploy@v2  # For Azure Function
-      #   with:
-      #     app-name: 'testshwetaapp'  # Replace with your Azure App Service name
-      #     publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
+      - name: 'Deploy to Azure App Service'
+        uses: azure/webapps-deploy@v2  # For Azure Function
+        with:
+          app-name: 'testshwetaapp'  # Replace with your Azure App Service name
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}  # Set secret in GitHub
 
       
