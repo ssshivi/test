@@ -32,6 +32,7 @@ jobs:
         with:
           name: published-app
           path: publish/
+          include-hidden-files: true
 
 
   deploy:
