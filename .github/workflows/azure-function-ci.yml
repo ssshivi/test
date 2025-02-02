@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0'  # Change to your .NET version
+          dotnet-version: '8.0.405'  # Change to your .NET version
 
       - name: Restore Dependencies
         run: dotnet restore
@@ -26,12 +26,6 @@ jobs:
 
       - name: Publish the Application
         run: dotnet publish -c Release -o publish
-      - name: Fix Deployment Structure
-        run: |
-          mkdir -p publish/bin
-          mv publish/*.dll publish/bin/
-          mv publish/*.exe publish/bin/
-          mv publish/worker.config.json publish/bin/
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
