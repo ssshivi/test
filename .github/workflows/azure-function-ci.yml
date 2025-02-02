@@ -28,8 +28,8 @@ jobs:
         run: dotnet publish -c Release -o publish
       - name: Fix Deployment Structure
         run: |
-          mkdir -p published/bin
-          mv published/*.dll published/bin/
+          mkdir -p publish/bin
+          mv publish/*.dll publish/bin/
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
